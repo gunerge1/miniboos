@@ -1,22 +1,21 @@
-/* ===== miniboos Admin·清新系（与H5同源设计语言） ===== */
+/* ===== miniboos Admin 主题 v2.1（2026-09-17对齐实测规范：纯青无渐变，清除绿色系残留） ===== */
 :root {
   --mb-primary: #00a6a7;
-  --mb-gradient: linear-gradient(135deg, #00bdbc 0%, #00a6a7 100%);
   --mb-bg: #f5f7fa;
   --mb-text: #1f2937;
   --mb-sub: #64748b;
-  --mb-radius: 16px;
-  --mb-shadow: 0 4px 20px rgba(0, 185, 107, 0.08);
+  --mb-radius: 12px;
+  --mb-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* Element Plus主题接管 */
+/* Element Plus主题接管：#00a6a7全系列lighten（旧版为绿色系残留，已纠正） */
 :root {
   --el-color-primary: #00a6a7;
-  --el-color-primary-light-3: #4cca92;
-  --el-color-primary-light-5: #80d9b5;
-  --el-color-primary-light-7: #b3e8d0;
-  --el-color-primary-light-8: #d9f1e4;
-  --el-color-primary-light-9: #ecf8f1;
+  --el-color-primary-light-3: #4cc5c6;
+  --el-color-primary-light-5: #80d4d5;
+  --el-color-primary-light-7: #b3e7e8;
+  --el-color-primary-light-8: #d9f2f2;
+  --el-color-primary-light-9: #ecf8f8;
   --el-color-primary-dark-2: #008b8c;
   --el-border-radius-base: 10px;
   --el-font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -24,20 +23,13 @@
 
 body { margin: 0; background: var(--mb-bg); color: var(--mb-text); }
 
-.mb-gradient-text {
-  background: var(--mb-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
 .mb-stat-card { border-radius: var(--mb-radius); border: none;
   box-shadow: var(--mb-shadow); transition: transform .15s ease; }
 .mb-stat-card:hover { transform: translateY(-2px); }
 
+/* 图标徽章：主题青纯色（无渐变） */
 .mb-icon-badge { width: 44px; height: 44px; border-radius: 12px;
-  background: var(--mb-gradient); color: #fff; font-size: 22px;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,185,107,.3); }
+  background: var(--mb-primary); color: #fff; font-size: 20px;
+  display: flex; align-items: center; justify-content: center; }
 
 .el-table { border-radius: 12px; }

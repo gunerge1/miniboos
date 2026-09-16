@@ -50,8 +50,9 @@ onMounted(load)
 </script>
 
 <style scoped>
-.app-card { cursor: pointer; transition: transform .15s ease; }
+.app-card { cursor: pointer; transition: transform .15s ease; margin-bottom: 14px; }
 .app-card:active { transform: scale(.98); }
+.app-card :deep(.van-tag) { padding: 3px 10px; font-size: 12px; }
 .row { display: flex; justify-content: space-between; align-items: center; }
 .title { font-weight: 700; font-size: 16px; }
 .sub { color: var(--mb-sub); font-size: 13px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; }

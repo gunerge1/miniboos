@@ -25,6 +25,9 @@ body { background: var(--mb-bg); color: var(--mb-title); }
 
 .page { min-height: 100vh; background: var(--mb-bg); }
 
+/* 滚动保险：部分嵌入webview给html/body/#app设固定高导致内容溢出不可滚（IAB实测），显式解锁 */
+html, body, #app { height: auto; min-height: 100%; }
+
 /* BOSS式主按钮：纯青实色圆角，无渐变无花哨 */
 .mb-btn {
   background: var(--mb-primary) !important;

@@ -8,7 +8,7 @@
       <el-col :span="5" v-for="item in cards" :key="item.label">
         <el-card class="mb-stat-card">
           <div class="stat">
-            <div class="mb-icon-badge">{{ item.icon }}</div>
+            <div class="mb-icon-badge"><el-icon :size="20"><component :is="item.icon" /></el-icon></div>
             <div>
               <div class="stat-value">{{ item.value }}</div>
               <div class="stat-label">{{ item.label }}</div>
@@ -18,20 +18,23 @@
       </el-col>
     </el-row>
     <el-card class="note">
-      <div>🎯 成功标尺对照（PRD第9节）：企业入驻10+ / 牛人注册500+ / 简历沉淀300+</div>
+      <div>成功标尺对照（PRD第9节）：企业入驻10+ / 牛人注册500+ / 简历沉淀300+</div>
       <div class="sub">触发时间框：上线后1个月（企业）/ 2个月（牛人与简历）</div>
     </el-card>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, markRaw } from 'vue'
 import { admin } from '../api'
+import { OfficeBuilding, Suitcase, Promotion, Document, User } from '@element-plus/icons-vue'
 
 const cards = ref([
-  { label: '企业数', value: 0, icon: '🏢' }, { label: '职位数', value: 0, icon: '💼' },
-  { label: '投递量', value: 0, icon: '📨' }, { label: '简历沉淀', value: 0, icon: '📄' },
-  { label: '牛人数', value: 0, icon: '👥' }
+  { label: '企业数', value: 0, icon: markRaw(OfficeBuilding) },
+  { label: '职位数', value: 0, icon: markRaw(Suitcase) },
+  { label: '投递量', value: 0, icon: markRaw(Promotion) },
+  { label: '简历沉淀', value: 0, icon: markRaw(Document) },
+  { label: '牛人数', value: 0, icon: markRaw(User) }
 ])
 
 onMounted(async () => {
@@ -46,7 +49,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.mb-hero { background: var(--mb-gradient); border-radius: var(--mb-radius); color: #fff;
+.mb-hero { background: var(--mb-primary); border-radius: var(--mb-radius); color: #fff;
   padding: 22px 24px; margin-bottom: 16px; border: none; }
 .hero-title { font-size: 20px; font-weight: 700; }
 .hero-sub { font-size: 13px; opacity: .9; margin-top: 6px; }

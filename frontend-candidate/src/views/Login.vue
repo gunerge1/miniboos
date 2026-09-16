@@ -3,7 +3,9 @@
     <!-- BOSS式极简登录：白底+青色品牌+一条青色顶线 -->
     <div class="brand-bar" />
     <div class="brand">
+      <div class="identity-icon"><van-icon name="user-o" size="34" color="#00a6a7" /></div>
       <div class="logo mb-logo">miniboos</div>
+      <div class="badge badge-c">牛人端</div>
       <div class="slogan">牛人找工作 · 先投递再开聊</div>
     </div>
 
@@ -63,9 +65,14 @@ const onSubmit = async () => {
 <style scoped>
 .login-page { background: #fff; min-height: 100vh; }
 .brand-bar { height: 4px; background: var(--mb-primary); }
-.brand { text-align: center; padding: 56px 0 36px; }
+.brand { text-align: center; padding: 48px 0 32px; }
+.identity-icon { width: 72px; height: 72px; border-radius: 50%; background: #ecf8f8;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
 .logo { font-size: 34px; font-weight: 800; }
-.slogan { color: var(--mb-sub); margin-top: 10px; font-size: 14px; }
+.badge { display: inline-block; margin-top: 10px; padding: 3px 14px; border-radius: 12px;
+  font-size: 12px; letter-spacing: 2px; }
+.badge-c { background: var(--mb-primary); color: #fff; }
+.slogan { color: var(--mb-sub); margin-top: 12px; font-size: 14px; }
 .form-wrap { margin: 0 20px; background: #fff; }
 .btns { margin: 24px 4px 8px; }
 .gap { margin-top: 12px; }

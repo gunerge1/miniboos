@@ -15,8 +15,9 @@
           <span class="salary">{{ job.salaryMin }}-{{ job.salaryMax }}K</span>
         </div>
         <div class="tags">
-          <span>{{ job.categoryLabel }}</span><span class="dot">·</span>
-          <span>{{ job.cityLabel }}</span><span v-if="job.educationLabel"><span class="dot">·</span>{{ job.educationLabel }}</span>
+          <span class="tag-chip" v-if="job.categoryLabel">{{ job.categoryLabel }}</span>
+          <span class="tag-chip" v-if="job.cityLabel">{{ job.cityLabel }}</span>
+          <span class="tag-chip" v-if="job.educationLabel">{{ job.educationLabel }}</span>
           <span v-if="job.matchScore >= 5" class="match">✦ 意向匹配</span>
         </div>
         <div class="company">{{ job.companyName }} · {{ job.companyIndustryLabel }}</div>
@@ -71,13 +72,14 @@ const load = async () => {
 
 <style scoped>
 .filters { margin: 0 12px 6px; }
-.job-card { cursor: pointer; padding: 14px 16px; }
+.job-card { cursor: pointer; padding: 14px 16px; margin-bottom: 14px; }
 .job-card:active { background: #f8f9fb; }
 .row1 { display: flex; justify-content: space-between; align-items: baseline; }
 .title { color: var(--mb-title); font-size: 16px; font-weight: 500; }
 .salary { color: var(--mb-salary); font-size: 20px; font-weight: 500; }
-.tags { margin: 8px 0 6px; color: var(--mb-text); font-size: 13px; }
-.dot { margin: 0 6px; color: #c8cdd6; }
-.match { color: var(--mb-primary); font-weight: 500; margin-left: 8px; }
-.company { color: var(--mb-sub); font-size: 14px; }
+.tags { margin: 10px 0 8px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tag-chip { background: var(--mb-chip-bg); color: var(--mb-sub); font-size: 11px;
+  padding: 3px 8px; border-radius: 4px; line-height: 1.4; }
+.match { color: var(--mb-primary); font-weight: 500; margin-left: 4px; font-size: 12px; }
+.company { color: var(--mb-sub); font-size: 12px; }
 </style>

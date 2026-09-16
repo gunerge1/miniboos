@@ -1,17 +1,27 @@
 <template>
   <div class="page">
     <van-nav-bar title="我的简历" class="mb-navbar" />
-    <van-cell-group inset title="基本信息">
-      <van-field v-model="form.name" label="姓名" placeholder="真实姓名" />
-      <van-field name="photo" label="简历照片">
-        <template #input>
-          <div class="photo-box" @click="pickPhoto">
-            <img v-if="form.photo" :src="form.photo" class="photo" />
-            <van-icon v-else name="camera-o" size="40" color="#dcdee0" />
+    <!-- BOSS式个人卡：头像左、姓名+求职属性右 -->
+    <van-cell-group inset class="profile-card">
+      <div class="profile-head">
+        <div class="avatar-box" @click="pickPhoto">
+          <img v-if="form.photo" :src="form.photo" class="avatar" />
+          <van-icon v-else name="user-o" size="34" color="#c8cdd6" />
+          <div class="avatar-cam"><van-icon name="camera-o" size="12" color="#fff" /></div>
+        </div>
+        <div class="profile-info">
+          <input v-model="form.name" class="name-input" placeholder="点击填写姓名" maxlength="12" />
+          <div class="attr-line">
+            <template v-if="categoryLabel || cityLabel || salaryText">
+              <span v-if="categoryLabel">{{ categoryLabel }}</span>
+              <span v-if="cityLabel"> · {{ cityLabel }}</span>
+              <span v-if="salaryText"> · {{ salaryText }}K</span>
+            </template>
+            <span v-else class="attr-empty">完善求职意向，提升匹配度</span>
           </div>
-          <input ref="fileInput" type="file" accept="image/*" hidden @change="onPhoto" />
-        </template>
-      </van-field>
+        </div>
+      </div>
+      <input ref="fileInput" type="file" accept="image/*" hidden @change="onPhoto" />
     </van-cell-group>
 
     <van-cell-group inset title="求职意向（意向匹配的原料）">
@@ -55,6 +65,7 @@
           {{ published ? '更新简历' : '发布简历' }}
         </van-button>
       </div>
+      <van-button round block plain type="danger" class="logout" @click="logout">退出登录</van-button>
     </div>
 
     <van-tabbar route>
@@ -77,9 +88,18 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { showToast } from 'vant'
 import { dicts, resumeApi } from '../api'
 import { compressPhoto } from '../utils/photo'
+
+const router = useRouter()
+const logout = () => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('role')
+  localStorage.removeItem('nickname')
+  router.replace('/login')
+}
 
 const form = ref({ name: '', photo: '', expectCategory: '', expectCity: '', intro: '' })
 const salaryText = ref('')
@@ -189,12 +209,24 @@ const save = async publish => {
 </script>
 
 <style scoped>
-.photo-box { width: 72px; height: 96px; border: 1px dashed #dcdee0; border-radius: 6px;
-  display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.photo { width: 100%; height: 100%; object-fit: cover; }
+/* BOSS式个人卡：头像左、信息右 */
+.profile-card { margin-top: 12px; }
+.profile-head { display: flex; align-items: center; gap: 14px; padding: 16px; }
+.avatar-box { position: relative; width: 64px; height: 86px; border-radius: 8px; background: var(--mb-chip-bg);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
+.avatar { width: 100%; height: 100%; border-radius: 8px; object-fit: cover; }
+.avatar-cam { position: absolute; right: -7px; bottom: -7px; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--mb-primary); display: flex; align-items: center; justify-content: center; border: 2px solid #fff; }
+.profile-info { flex: 1; min-width: 0; }
+.name-input { border: none; outline: none; font-size: 20px; font-weight: 600; color: var(--mb-title);
+  background: transparent; width: 100%; padding: 0; font-family: inherit; }
+.name-input::placeholder { color: #c8cdd6; font-weight: 400; }
+.attr-line { margin-top: 8px; color: var(--mb-sub); font-size: 12px; line-height: 1.5; }
+.attr-empty { color: #c8cdd6; }
 .exp { margin-bottom: 2px; }
 .add-exp { padding: 10px 16px; }
-.action { margin: 20px 16px 70px; }
+.action { margin: 20px 16px 90px; }
 .btn-row { display: flex; gap: 12px; }
 .half { flex: 1; }
+.logout { margin-top: 12px; }
 </style>

@@ -2,8 +2,10 @@
   <div class="page login-page">
     <div class="brand-bar" />
     <div class="brand">
+      <div class="identity-icon"><van-icon name="shop-o" size="34" color="#008b8c" /></div>
       <div class="logo mb-logo">miniboos</div>
-      <div class="slogan">招聘端 · 企业认证后开始招人</div>
+      <div class="badge badge-b">招聘端</div>
+      <div class="slogan">企业认证后开始招人</div>
     </div>
     <div class="form-wrap">
       <van-form @submit="onSubmit">
@@ -59,10 +61,15 @@ const onSubmit = async () => {
 
 <style scoped>
 .login-page { background: #fff; min-height: 100vh; }
-.brand-bar { height: 4px; background: var(--mb-primary); }
-.brand { text-align: center; padding: 56px 0 36px; }
+.brand-bar { height: 4px; background: #008b8c; } /* 深青：与C端亮青区分 */
+.brand { text-align: center; padding: 48px 0 32px; }
+.identity-icon { width: 72px; height: 72px; border-radius: 50%; background: #e6f2f2;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
 .logo { color: var(--mb-primary); font-size: 34px; font-weight: 800; }
-.slogan { color: var(--mb-sub); margin-top: 10px; font-size: 14px; }
+.badge { display: inline-block; margin-top: 10px; padding: 3px 14px; border-radius: 12px;
+  font-size: 12px; letter-spacing: 2px; }
+.badge-b { background: #008b8c; color: #fff; }
+.slogan { color: var(--mb-sub); margin-top: 12px; font-size: 14px; }
 .form-wrap { margin: 0 20px; background: #fff; }
 .btns { margin: 24px 4px 8px; }
 .gap { margin-top: 12px; }
