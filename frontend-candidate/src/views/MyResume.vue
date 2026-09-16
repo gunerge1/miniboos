@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <van-nav-bar title="我的简历" />
+    <van-nav-bar title="我的简历" class="mb-navbar" />
     <van-cell-group inset title="基本信息">
       <van-field v-model="form.name" label="姓名" placeholder="真实姓名" />
       <van-field name="photo" label="简历照片">

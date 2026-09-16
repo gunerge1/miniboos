@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <van-nav-bar title="与牛人沟通" left-arrow @click-left="$router.back()" />
+    <van-nav-bar class="mb-navbar" title="与牛人沟通" left-arrow @click-left="$router.back()" />
     <van-pull-refresh v-model="refreshing" @refresh="load" class="msg-area">
       <div class="bubble-wrap">
         <div v-for="m in messages" :key="m.id" :class="['bubble', m.senderRole === 'HR' ? 'mine' : 'theirs']">

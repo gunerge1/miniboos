@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <van-nav-bar title="职位管理" />
+    <van-nav-bar class="mb-navbar" title="职位管理" />
     <van-pull-refresh v-model="refreshing" @refresh="load">
       <van-empty v-if="!loading && jobs.length === 0 && approved" description="还没有职位，点下方发布第一个"
                  image="search" />

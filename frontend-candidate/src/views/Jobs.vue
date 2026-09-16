@@ -1,29 +1,27 @@
 <template>
   <div class="page">
-    <van-nav-bar title="找职位" />
-    <van-search v-model="kw" placeholder="搜职位关键词" @search="reload" />
-    <van-dropdown-menu>
+    <van-nav-bar title="找职位" class="mb-navbar" />
+    <van-search v-model="kw" placeholder="搜职位关键词，如 Java" @search="reload" background="transparent" />
+    <van-dropdown-menu class="filters">
       <van-dropdown-item v-model="category" :options="categoryOptions" @change="reload" />
       <van-dropdown-item v-model="city" :options="cityOptions" @change="reload" />
     </van-dropdown-menu>
 
-    <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了"
+    <van-list v-model:loading="loading" :finished="finished" finished-text="— 到底啦 —"
               @load="load" offset="100">
-      <van-cell v-for="job in list" :key="job.id" is-link @click="$router.push('/job/' + job.id)">
-        <template #title>
-          <div class="job-title">
-            <span>{{ job.title }}</span>
-            <span class="salary">{{ job.salaryMin }}-{{ job.salaryMax }}K</span>
-          </div>
-          <div class="job-tags">
-            <van-tag plain type="primary">{{ job.categoryLabel }}</van-tag>
-            <van-tag plain type="success">{{ job.cityLabel }}</van-tag>
-            <van-tag v-if="job.educationLabel" plain>{{ job.educationLabel }}</van-tag>
-            <van-tag v-if="job.matchScore >= 5" type="danger">意向匹配</van-tag>
-          </div>
-          <div class="company">{{ job.companyName }} · {{ job.companyIndustryLabel }}</div>
-        </template>
-      </van-cell>
+      <div v-for="job in list" :key="job.id" class="job-card mb-card" @click="$router.push('/job/' + job.id)">
+        <div class="row1">
+          <span class="title">{{ job.title }}</span>
+          <span class="salary mb-salary">{{ job.salaryMin }}-{{ job.salaryMax }}K</span>
+        </div>
+        <div class="tags">
+          <span class="chip">{{ job.categoryLabel }}</span>
+          <span class="chip">{{ job.cityLabel }}</span>
+          <span v-if="job.educationLabel" class="chip">{{ job.educationLabel }}</span>
+          <span v-if="job.matchScore >= 5" class="chip match">✦ 意向匹配</span>
+        </div>
+        <div class="company">🏢 {{ job.companyName }} · {{ job.companyIndustryLabel }}</div>
+      </div>
     </van-list>
 
     <van-tabbar route>
@@ -73,8 +71,15 @@ const load = async () => {
 </script>
 
 <style scoped>
-.job-title { display: flex; justify-content: space-between; font-weight: 600; }
-.salary { color: #ee0a24; }
-.job-tags { margin: 6px 0; display: flex; gap: 6px; flex-wrap: wrap; }
-.company { color: #969799; font-size: 13px; }
+.filters { border-radius: 12px; margin: 0 16px 8px; overflow: hidden; }
+.job-card { cursor: pointer; transition: transform .15s ease; }
+.job-card:active { transform: scale(.98); }
+.row1 { display: flex; justify-content: space-between; align-items: baseline; }
+.title { font-size: 17px; font-weight: 700; }
+.salary { font-size: 17px; }
+.tags { margin: 10px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { font-size: 12px; color: var(--mb-sub); background: var(--mb-bg);
+  border-radius: 999px; padding: 3px 10px; }
+.chip.match { color: #fff; background: var(--mb-gradient); font-weight: 600; }
+.company { color: var(--mb-sub); font-size: 13px; }
 </style>

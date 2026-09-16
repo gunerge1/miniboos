@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <van-nav-bar title="企业认证" left-arrow @click-left="$router.back()" />
+    <van-nav-bar class="mb-navbar" title="企业认证" left-arrow @click-left="$router.back()" />
     <template v-if="company">
       <van-cell-group inset>
         <van-cell title="企业名称" :value="company.name" />

@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <van-nav-bar title="发布职位" left-arrow @click-left="$router.back()" />
+    <van-nav-bar class="mb-navbar" title="发布职位" left-arrow @click-left="$router.back()" />
     <van-form @submit="submit">
       <van-cell-group inset>
         <van-field v-model="form.title" label="职位名" placeholder="如：Java后端工程师" required

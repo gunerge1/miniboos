@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <van-nav-bar title="投递列表" left-arrow @click-left="$router.back()" />
+    <van-nav-bar class="mb-navbar" title="投递列表" left-arrow @click-left="$router.back()" />
     <van-pull-refresh v-model="refreshing" @refresh="load">
       <van-empty v-if="!loading && list.length === 0" description="还没有牛人投递" />
       <van-cell v-for="c in list" :key="c.applicationId">
