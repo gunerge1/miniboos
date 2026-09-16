@@ -19,7 +19,8 @@
         </template>
         <template #label>
           <div class="ops">
-            <van-button size="small" plain type="primary" @click="chat(c)">沟通</van-button>
+            <van-button size="small" plain type="primary" @click="viewResume(c)">查简历</van-button>
+            <van-button size="small" plain type="default" @click="chat(c)">沟通</van-button>
             <van-button v-if="can(c.status, 'VIEWED')" size="small" plain @click="set(c, 'VIEWED')">标记已看</van-button>
             <van-button v-if="can(c.status, 'INTERVIEW')" size="small" plain type="warning"
                        @click="set(c, 'INTERVIEW')">约面</van-button>
@@ -79,6 +80,7 @@ const set = async (c, status) => {
 }
 
 const chat = c => router.push('/chat/' + c.applicationId)
+const viewResume = c => router.push('/resume/' + c.applicationId)
 
 onMounted(load)
 </script>

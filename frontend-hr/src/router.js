@@ -6,6 +6,7 @@ const routes = [
   { path: '/company', component: () => import('./views/Company.vue') },
   { path: '/publish', component: () => import('./views/JobPublish.vue') },
   { path: '/candidates/:jobId', component: () => import('./views/Candidates.vue') },
+  { path: '/resume/:appId', component: () => import('./views/ResumeView.vue') },
   { path: '/chat/:appId', component: () => import('./views/Chat.vue') }
 ]
 

@@ -36,7 +36,8 @@ export const jobApi = {
   my: () => api.get('/my/jobs'),
   switchStatus: (id, status) => api.put(`/jobs/${id}/status`, { status }),
   candidates: id => api.get(`/my/jobs/${id}/applications`),
-  updateAppStatus: (id, status) => api.put(`/applications/${id}/status`, { status })
+  updateAppStatus: (id, status) => api.put(`/applications/${id}/status`, { status }),
+  resumeOf: appId => api.get(`/applications/${appId}/resume`)
 }
 
 export const messageApi = {

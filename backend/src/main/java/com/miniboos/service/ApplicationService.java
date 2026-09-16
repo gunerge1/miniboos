@@ -3,6 +3,7 @@ package com.miniboos.service;
 import com.miniboos.common.BizException;
 import com.miniboos.dto.ApplicationVO;
 import com.miniboos.dto.CandidateVO;
+import com.miniboos.dto.ResumeDetailVO;
 import com.miniboos.entity.Application;
 import com.miniboos.entity.Company;
 import com.miniboos.entity.Job;
@@ -10,6 +11,7 @@ import com.miniboos.entity.Resume;
 import com.miniboos.mapper.ApplicationMapper;
 import com.miniboos.mapper.CompanyMapper;
 import com.miniboos.mapper.JobMapper;
+import com.miniboos.mapper.ResumeExperienceMapper;
 import com.miniboos.mapper.ResumeMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,7 @@ public class ApplicationService {
     private final JobMapper jobMapper;
     private final CompanyMapper companyMapper;
     private final ResumeMapper resumeMapper;
+    private final ResumeExperienceMapper expMapper;
     private final JobService jobService;
 
     public void apply(Long userId, Long jobId) {
@@ -93,5 +96,24 @@ public class ApplicationService {
         Company company = job == null ? null : companyMapper.findById(job.getCompanyId());
         if (company != null && company.getHrUserId().equals(userId)) return app;
         throw BizException.forbidden("只有会话双方能查看");
+    }
+
+    /** HR查看投递者的完整简历（A类缺口补齐：HR核心动作"查简历"） */
+    public ResumeDetailVO resumeOfApplication(Long hrUserId, Long appId) {
+        Application app = findAsParticipant(appId, hrUserId); // 复用归属校验
+        Resume resume = resumeMapper.findByUserId(app.getUserId());
+        if (resume == null) throw BizException.notFound("该牛人尚未填写简历");
+        ResumeDetailVO vo = new ResumeDetailVO();
+        vo.setId(resume.getId());
+        vo.setName(resume.getName());
+        vo.setPhoto(resume.getPhoto());
+        vo.setExpectCategory(resume.getExpectCategory());
+        vo.setExpectCity(resume.getExpectCity());
+        vo.setExpectSalaryMin(resume.getExpectSalaryMin());
+        vo.setExpectSalaryMax(resume.getExpectSalaryMax());
+        vo.setIntro(resume.getIntro());
+        vo.setPublished(resume.getPublished());
+        vo.setExperiences(expMapper.listByResumeId(resume.getId()));
+        return vo;
     }
 }

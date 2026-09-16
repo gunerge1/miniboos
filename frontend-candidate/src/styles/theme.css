@@ -1,24 +1,23 @@
-/* ===== miniboos 设计Token·清新系 =====
-   主渐变：青绿→天蓝 | 薪资点睛：暖橙 | 大圆角+柔影=轻拟物
-   三端统一视觉语言（B端同款复制） */
+/* ===== miniboos 设计Token v3·BOSS绿 =====
+   参照系：BOSS直聘（CEO拍板 2026-09-16）
+   特征：品牌绿主色 + 薪资绿大字 + 扁平紧凑卡片 */
 
 :root {
-  --mb-primary: #0ea5e9;
-  --mb-gradient: linear-gradient(135deg, #00c2a8 0%, #0ea5e9 100%);
-  --mb-salary: #ff6b35;
-  --mb-bg: #f5f7fa;
-  --mb-text: #1f2937;
-  --mb-sub: #64748b;
+  --mb-primary: #00b96b;
+  --mb-gradient: linear-gradient(135deg, #00d68f 0%, #00b96b 100%);
+  --mb-salary: #00b96b;            /* BOSS惯例：薪资是绿的 */
+  --mb-bg: #f6f7f8;
+  --mb-text: #222327;
+  --mb-sub: #7e8794;
   --mb-card: #ffffff;
-  --mb-radius: 16px;
-  --mb-shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
+  --mb-radius: 10px;               /* 扁平紧凑，非大圆角浮卡 */
+  --mb-shadow: 0 2px 8px rgba(34, 35, 39, 0.05);
 }
 
 /* --- Vant主题变量接管 --- */
 :root {
   --van-primary-color: var(--mb-primary);
-  --van-border-radius-lg: 12px;
-  --van-cell-background: transparent;
+  --van-border-radius-lg: 10px;
   --van-nav-bar-title-font-size: 17px;
 }
 
@@ -27,51 +26,35 @@ body { background: var(--mb-bg); color: var(--mb-text); }
 /* --- 通用组件 --- */
 .page { min-height: 100vh; background: var(--mb-bg); }
 
-/* 主按钮=品牌渐变胶囊 */
 .mb-btn {
   background: var(--mb-gradient) !important;
   border: none !important;
   color: #fff !important;
   font-weight: 600;
-  box-shadow: 0 6px 16px rgba(14, 165, 233, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 185, 107, 0.25);
 }
 
-/* 品牌渐变导航栏 */
-.mb-navbar {
-  background: var(--mb-gradient);
-}
+.mb-navbar { background: var(--mb-gradient); }
 .mb-navbar .van-nav-bar__title,
 .mb-navbar .van-nav-bar__arrow { color: #fff !important; }
 
-/* 大圆角浮起卡片 */
 .mb-card {
   background: var(--mb-card);
   border-radius: var(--mb-radius);
   box-shadow: var(--mb-shadow);
-  margin: 12px 16px;
-  padding: 16px;
+  margin: 10px 12px;
+  padding: 14px;
 }
 
-/* 页面标题（非导航场景） */
-.mb-page-title {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
+.mb-page-title { font-size: 22px; font-weight: 700; }
 
-/* 品牌logo字 */
 .mb-logo {
-  font-size: 34px;
-  font-weight: 800;
+  font-size: 34px; font-weight: 800;
   background: var(--mb-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
   letter-spacing: 1px;
 }
 
-/* 薪资强调 */
 .mb-salary { color: var(--mb-salary); font-weight: 700; }
 
-/* 空状态与tabbar */
 .van-tabbar-item--active { color: var(--mb-primary) !important; font-weight: 600; }

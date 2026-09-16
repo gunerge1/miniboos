@@ -1,23 +1,23 @@
 /* ===== miniboos Admin·清新系（与H5同源设计语言） ===== */
 :root {
-  --mb-primary: #0ea5e9;
-  --mb-gradient: linear-gradient(135deg, #00c2a8 0%, #0ea5e9 100%);
+  --mb-primary: #00b96b;
+  --mb-gradient: linear-gradient(135deg, #00d68f 0%, #00b96b 100%);
   --mb-bg: #f5f7fa;
   --mb-text: #1f2937;
   --mb-sub: #64748b;
   --mb-radius: 16px;
-  --mb-shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
+  --mb-shadow: 0 4px 20px rgba(0, 185, 107, 0.08);
 }
 
 /* Element Plus主题接管 */
 :root {
-  --el-color-primary: #0ea5e9;
-  --el-color-primary-light-3: #4cc4f2;
-  --el-color-primary-light-5: #86d9f8;
-  --el-color-primary-light-7: #bde9fc;
-  --el-color-primary-light-8: #d8f1fd;
-  --el-color-primary-light-9: #ecf8fe;
-  --el-color-primary-dark-2: #0b85ba;
+  --el-color-primary: #00b96b;
+  --el-color-primary-light-3: #4cca92;
+  --el-color-primary-light-5: #80d9b5;
+  --el-color-primary-light-7: #b3e8d0;
+  --el-color-primary-light-8: #d9f1e4;
+  --el-color-primary-light-9: #ecf8f1;
+  --el-color-primary-dark-2: #009556;
   --el-border-radius-base: 10px;
   --el-font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
@@ -38,6 +38,6 @@ body { margin: 0; background: var(--mb-bg); color: var(--mb-text); }
 .mb-icon-badge { width: 44px; height: 44px; border-radius: 12px;
   background: var(--mb-gradient); color: #fff; font-size: 22px;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 10px rgba(14,165,233,.3); }
+  box-shadow: 0 4px 10px rgba(0,185,107,.3); }
 
 .el-table { border-radius: 12px; }

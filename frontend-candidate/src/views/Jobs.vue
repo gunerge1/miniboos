@@ -71,15 +71,15 @@ const load = async () => {
 </script>
 
 <style scoped>
-.filters { border-radius: 12px; margin: 0 16px 8px; overflow: hidden; }
-.job-card { cursor: pointer; transition: transform .15s ease; }
-.job-card:active { transform: scale(.98); }
+.filters { border-radius: 10px; margin: 0 12px 6px; overflow: hidden; }
+.job-card { cursor: pointer; padding: 14px 12px; }
+.job-card:active { background: #fafbfc; }
 .row1 { display: flex; justify-content: space-between; align-items: baseline; }
-.title { font-size: 17px; font-weight: 700; }
-.salary { font-size: 17px; }
-.tags { margin: 10px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+.title { font-size: 16px; font-weight: 700; }
+.salary { font-size: 16px; }
+.tags { margin: 8px 0 6px; display: flex; gap: 6px; flex-wrap: wrap; }
 .chip { font-size: 12px; color: var(--mb-sub); background: var(--mb-bg);
-  border-radius: 999px; padding: 3px 10px; }
-.chip.match { color: #fff; background: var(--mb-gradient); font-weight: 600; }
+  border-radius: 4px; padding: 2px 8px; }
+.chip.match { color: #fff; background: var(--mb-gradient); font-weight: 600; border-radius: 4px; }
 .company { color: var(--mb-sub); font-size: 13px; }
 </style>

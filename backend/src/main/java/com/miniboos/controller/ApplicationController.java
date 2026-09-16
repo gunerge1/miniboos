@@ -3,6 +3,7 @@ package com.miniboos.controller;
 import com.miniboos.common.JwtUtil;
 import com.miniboos.common.RequireRole;
 import com.miniboos.common.Result;
+import com.miniboos.dto.ResumeDetailVO;
 import com.miniboos.dto.req.AdminReq;
 import com.miniboos.dto.req.BizReq;
 import com.miniboos.service.ApplicationService;
@@ -45,5 +46,13 @@ public class ApplicationController {
                                      @Valid @RequestBody AdminReq.AppStatus req) {
         applicationService.updateStatus(user.userId(), id, req.getStatus());
         return Result.ok();
+    }
+
+    /** HR查看投递牛人的完整简历（A类缺口补齐，2026-09-16） */
+    @GetMapping("/applications/{id}/resume")
+    @RequireRole({"HR"})
+    public Result<ResumeDetailVO> resume(@RequestAttribute("currentUser") JwtUtil.CurrentUser user,
+                                         @PathVariable Long id) {
+        return Result.ok(applicationService.resumeOfApplication(user.userId(), id));
     }
 }
