@@ -22,7 +22,7 @@
         </template>
       </van-cell>
     </van-pull-refresh>
-    <div class="fab" @click="goPublish"><van-icon name="plus" /></div>
+    <div class="fab" @click="goPublish"><van-icon name="plus" /><span>发布</span></div>
     <van-tabbar route>
       <van-tabbar-item icon="bag-o" to="/">职位管理</van-tabbar-item>
       <van-tabbar-item icon="shop-o" to="/company">企业认证</van-tabbar-item>
@@ -86,7 +86,7 @@ onMounted(load)
 .title { font-weight: 600; }
 .sub { color: #969799; font-size: 13px; margin-top: 4px; }
 .ops { display: flex; gap: 6px; }
-.fab { position: fixed; right: 20px; bottom: 90px; width: 52px; height: 52px; border-radius: 50%;
-  background: #1989fa; color: #fff; display: flex; align-items: center; justify-content: center;
-  font-size: 26px; box-shadow: 0 4px 12px rgba(25,137,250,.4); }
+.fab { position: fixed; right: 20px; bottom: 90px; height: 48px; padding: 0 20px; border-radius: 24px;
+  background: var(--mb-primary); color: #fff; display: flex; align-items: center; justify-content: center; gap: 4px;
+  font-size: 15px; font-weight: 500; box-shadow: 0 4px 12px rgba(0,166,167,.4); }
 </style>

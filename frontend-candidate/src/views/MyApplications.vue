@@ -8,7 +8,7 @@
           <span class="title">{{ a.jobTitle }}</span>
           <van-tag :type="tagType(a.status)" round>{{ statusText(a.status) }}</van-tag>
         </div>
-        <div class="sub">🏢 {{ a.companyName }} · {{ a.createdAt?.slice(0, 10) }}</div>
+        <div class="sub"><span>🏢 {{ a.companyName }} · {{ a.createdAt?.slice(0, 10) }}</span><span class="go-chat">继续沟通 ›</span></div>
       </div>
     </van-pull-refresh>
     <van-tabbar route>
@@ -54,5 +54,6 @@ onMounted(load)
 .app-card:active { transform: scale(.98); }
 .row { display: flex; justify-content: space-between; align-items: center; }
 .title { font-weight: 700; font-size: 16px; }
-.sub { color: var(--mb-sub); font-size: 13px; margin-top: 8px; }
+.sub { color: var(--mb-sub); font-size: 13px; margin-top: 8px; display: flex; justify-content: space-between; align-items: center; }
+.go-chat { color: var(--mb-primary); font-size: 13px; }
 </style>

@@ -74,7 +74,7 @@ const load = async () => {
 .job-card { cursor: pointer; padding: 14px 16px; }
 .job-card:active { background: #f8f9fb; }
 .row1 { display: flex; justify-content: space-between; align-items: baseline; }
-.title { color: var(--mb-primary); font-size: 16px; font-weight: 500; }
+.title { color: var(--mb-title); font-size: 16px; font-weight: 500; }
 .salary { color: var(--mb-salary); font-size: 20px; font-weight: 500; }
 .tags { margin: 8px 0 6px; color: var(--mb-text); font-size: 13px; }
 .dot { margin: 0 6px; color: #c8cdd6; }

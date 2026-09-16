@@ -55,8 +55,8 @@ body { background: var(--mb-bg); color: var(--mb-title); }
 /* 薪资：红橙大字（全场唯一暖色，钱最醒目——BOSS视觉密码） */
 .mb-salary { color: var(--mb-salary); font-weight: 500; }
 
-/* 职位名：BOSS式青色链接感 */
-.mb-job-name { color: var(--mb-primary); font-size: 16px; font-weight: 500; }
+/* 职位名：深黑#222（v2.1复测修正：BOSS职位名非青色，青色只管交互） */
+.mb-job-name { color: var(--mb-title); font-size: 16px; font-weight: 500; }
 
 /* 标签：蓝灰文字直排（BOSS式，无底色） */
 .mb-plain-tags { color: var(--mb-text); font-size: 13px; }
