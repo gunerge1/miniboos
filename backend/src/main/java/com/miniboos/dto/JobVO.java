@@ -23,5 +23,6 @@ public class JobVO {
     private Long companyId;
     private String companyName;
     private String companyIndustryLabel;
+    private Integer matchScore;
     private LocalDateTime createdAt;
 }

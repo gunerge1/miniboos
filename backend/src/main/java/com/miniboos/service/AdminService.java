@@ -76,11 +76,12 @@ public class AdminService {
             args[argCount++] = like;
             args[argCount++] = like;
         }
+        final int count = argCount; // lambda只认实际final变量
         List<AdminUserVO> list = jdbc.query(
                 "SELECT id, phone, role, nickname, status, created_at FROM users " + where
                         + "ORDER BY created_at DESC LIMIT " + offset + ", " + size,
                 ps -> {
-                    for (int i = 0; i < argCount; i++) {
+                    for (int i = 0; i < count; i++) {
                         ps.setObject(i + 1, args[i]);
                     }
                 },
