@@ -24,6 +24,12 @@ public interface JobMapper {
     @Select("SELECT COUNT(*) FROM jobs")
     long countAll();
 
+    @Select("<script>SELECT * FROM jobs <where> <if test='status!=null and status!=\"\"'>status=#{status}</if> </where> ORDER BY created_at DESC LIMIT #{offset}, #{size}</script>")
+    List<Job> listByStatus(@Param("status") String status, @Param("offset") int offset, @Param("size") int size);
+
+    @Select("<script>SELECT COUNT(*) FROM jobs <where> <if test='status!=null and status!=\"\"'>status=#{status}</if> </where></script>")
+    long countByStatus(@Param("status") String status);
+
     // 公开职位列表（筛选+意向匹配CASE排序）——XML实现，见mapper/JobMapper.xml
     List<JobVO> listPublic(@Param("category") String category, @Param("city") String city,
                            @Param("kw") String kw, @Param("offset") int offset, @Param("size") int size,
