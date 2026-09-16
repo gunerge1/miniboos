@@ -1,0 +1,16 @@
+# dev环境：本机MySQL dev_db（ADR-001：数据库分离，dev任意折腾不伤生产）
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/dev_db?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
+    username: root
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 5
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+logging:
+  level:
+    com.miniboos: debug
