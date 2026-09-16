@@ -1,7 +1,7 @@
 /* ===== miniboos Admin·清新系（与H5同源设计语言） ===== */
 :root {
-  --mb-primary: #00b96b;
-  --mb-gradient: linear-gradient(135deg, #00d68f 0%, #00b96b 100%);
+  --mb-primary: #00a6a7;
+  --mb-gradient: linear-gradient(135deg, #00bdbc 0%, #00a6a7 100%);
   --mb-bg: #f5f7fa;
   --mb-text: #1f2937;
   --mb-sub: #64748b;
@@ -11,13 +11,13 @@
 
 /* Element Plus主题接管 */
 :root {
-  --el-color-primary: #00b96b;
+  --el-color-primary: #00a6a7;
   --el-color-primary-light-3: #4cca92;
   --el-color-primary-light-5: #80d9b5;
   --el-color-primary-light-7: #b3e8d0;
   --el-color-primary-light-8: #d9f1e4;
   --el-color-primary-light-9: #ecf8f1;
-  --el-color-primary-dark-2: #009556;
+  --el-color-primary-dark-2: #008b8c;
   --el-border-radius-base: 10px;
   --el-font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }

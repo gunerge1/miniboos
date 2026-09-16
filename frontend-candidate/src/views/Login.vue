@@ -1,13 +1,13 @@
 <template>
-  <div class="page login-bg">
-    <!-- 清新系登录页：渐变天空 + 浮起卡片 -->
-    <div class="sky">
-      <div class="cloud c1" /><div class="cloud c2" />
+  <div class="page login-page">
+    <!-- BOSS式极简登录：白底+青色品牌+一条青色顶线 -->
+    <div class="brand-bar" />
+    <div class="brand">
       <div class="logo mb-logo">miniboos</div>
       <div class="slogan">牛人找工作 · 先投递再开聊</div>
     </div>
 
-    <div class="login-card">
+    <div class="form-wrap">
       <van-form @submit="onSubmit">
         <van-field v-model="form.phone" label="手机号" placeholder="11位手机号" maxlength="11"
                    :rules="[{ required: true, message: '请填手机号' }, { pattern: /^1\d{10}$/, message: '手机号格式不对' }]" />
@@ -61,16 +61,12 @@ const onSubmit = async () => {
 </script>
 
 <style scoped>
-.login-bg { background: var(--mb-bg); }
-.sky { position: relative; padding: 70px 0 50px; text-align: center;
-  background: var(--mb-gradient); border-radius: 0 0 40px 40px; overflow: hidden; }
-.sky .logo { color: #fff; background: none; -webkit-text-fill-color: #fff; font-size: 38px; }
-.slogan { color: rgba(255,255,255,.9); margin-top: 10px; letter-spacing: 2px; }
-.cloud { position: absolute; border-radius: 50%; background: rgba(255,255,255,.15); }
-.c1 { width: 140px; height: 140px; top: -50px; left: -30px; }
-.c2 { width: 90px; height: 90px; bottom: -20px; right: 30px; }
-.login-card { background: #fff; border-radius: var(--mb-radius); box-shadow: var(--mb-shadow);
-  margin: -28px 20px 0; padding: 24px 8px 16px; position: relative; }
-.btns { margin: 20px 12px 8px; }
+.login-page { background: #fff; min-height: 100vh; }
+.brand-bar { height: 4px; background: var(--mb-primary); }
+.brand { text-align: center; padding: 56px 0 36px; }
+.logo { font-size: 34px; font-weight: 800; }
+.slogan { color: var(--mb-sub); margin-top: 10px; font-size: 14px; }
+.form-wrap { margin: 0 20px; background: #fff; }
+.btns { margin: 24px 4px 8px; }
 .gap { margin-top: 12px; }
 </style>

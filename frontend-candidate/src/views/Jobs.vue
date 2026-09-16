@@ -12,15 +12,14 @@
       <div v-for="job in list" :key="job.id" class="job-card mb-card" @click="$router.push('/job/' + job.id)">
         <div class="row1">
           <span class="title">{{ job.title }}</span>
-          <span class="salary mb-salary">{{ job.salaryMin }}-{{ job.salaryMax }}K</span>
+          <span class="salary">{{ job.salaryMin }}-{{ job.salaryMax }}K</span>
         </div>
         <div class="tags">
-          <span class="chip">{{ job.categoryLabel }}</span>
-          <span class="chip">{{ job.cityLabel }}</span>
-          <span v-if="job.educationLabel" class="chip">{{ job.educationLabel }}</span>
-          <span v-if="job.matchScore >= 5" class="chip match">✦ 意向匹配</span>
+          <span>{{ job.categoryLabel }}</span><span class="dot">·</span>
+          <span>{{ job.cityLabel }}</span><span v-if="job.educationLabel"><span class="dot">·</span>{{ job.educationLabel }}</span>
+          <span v-if="job.matchScore >= 5" class="match">✦ 意向匹配</span>
         </div>
-        <div class="company">🏢 {{ job.companyName }} · {{ job.companyIndustryLabel }}</div>
+        <div class="company">{{ job.companyName }} · {{ job.companyIndustryLabel }}</div>
       </div>
     </van-list>
 
@@ -71,15 +70,14 @@ const load = async () => {
 </script>
 
 <style scoped>
-.filters { border-radius: 10px; margin: 0 12px 6px; overflow: hidden; }
-.job-card { cursor: pointer; padding: 14px 12px; }
-.job-card:active { background: #fafbfc; }
+.filters { margin: 0 12px 6px; }
+.job-card { cursor: pointer; padding: 14px 16px; }
+.job-card:active { background: #f8f9fb; }
 .row1 { display: flex; justify-content: space-between; align-items: baseline; }
-.title { font-size: 16px; font-weight: 700; }
-.salary { font-size: 16px; }
-.tags { margin: 8px 0 6px; display: flex; gap: 6px; flex-wrap: wrap; }
-.chip { font-size: 12px; color: var(--mb-sub); background: var(--mb-bg);
-  border-radius: 4px; padding: 2px 8px; }
-.chip.match { color: #fff; background: var(--mb-gradient); font-weight: 600; border-radius: 4px; }
-.company { color: var(--mb-sub); font-size: 13px; }
+.title { color: var(--mb-primary); font-size: 16px; font-weight: 500; }
+.salary { color: var(--mb-salary); font-size: 20px; font-weight: 500; }
+.tags { margin: 8px 0 6px; color: var(--mb-text); font-size: 13px; }
+.dot { margin: 0 6px; color: #c8cdd6; }
+.match { color: var(--mb-primary); font-weight: 500; margin-left: 8px; }
+.company { color: var(--mb-sub); font-size: 14px; }
 </style>

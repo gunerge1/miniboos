@@ -1,43 +1,46 @@
-/* ===== miniboos 设计Token v3·BOSS绿 =====
-   参照系：BOSS直聘（CEO拍板 2026-09-16）
-   特征：品牌绿主色 + 薪资绿大字 + 扁平紧凑卡片 */
+/* ===== miniboos 设计Token v4·真BOSS规格（2026-09-16实地测绘zhipin.com） =====
+   实测三色系统：青#00A6A7管交互 | 红橙#FE574A只管薪资 | 其余灰阶
+   白底为主、12px卡片圆角、信息密度优先 */
 
 :root {
-  --mb-primary: #00b96b;
-  --mb-gradient: linear-gradient(135deg, #00d68f 0%, #00b96b 100%);
-  --mb-salary: #00b96b;            /* BOSS惯例：薪资是绿的 */
-  --mb-bg: #f6f7f8;
-  --mb-text: #222327;
-  --mb-sub: #7e8794;
+  --mb-primary: #00a6a7;      /* 实测rgb(0,166,167)：职位名/按钮/链接/激活态 */
+  --mb-primary-hover: #00bdbc;
+  --mb-salary: #fe574a;       /* 实测rgb(254,87,74)：薪资唯一强调色 */
+  --mb-bg: #f2f4f7;           /* 实测页面底色 */
+  --mb-text: #414a60;         /* 实测标签蓝灰 */
+  --mb-title: #222222;
+  --mb-sub: #666666;          /* 实测公司名灰 */
+  --mb-chip-bg: #f8f8f8;      /* 实测标签浅灰底 */
   --mb-card: #ffffff;
-  --mb-radius: 10px;               /* 扁平紧凑，非大圆角浮卡 */
-  --mb-shadow: 0 2px 8px rgba(34, 35, 39, 0.05);
+  --mb-radius: 12px;          /* 实测卡片圆角 */
+  --mb-shadow: none;          /* BOSS卡片基本无阴影，靠底色分区 */
 }
 
-/* --- Vant主题变量接管 --- */
 :root {
   --van-primary-color: var(--mb-primary);
-  --van-border-radius-lg: 10px;
-  --van-nav-bar-title-font-size: 17px;
+  --van-nav-bar-title-font-size: 16px;
 }
 
-body { background: var(--mb-bg); color: var(--mb-text); }
+body { background: var(--mb-bg); color: var(--mb-title); }
 
-/* --- 通用组件 --- */
 .page { min-height: 100vh; background: var(--mb-bg); }
 
+/* BOSS式主按钮：纯青实色圆角，无渐变无花哨 */
 .mb-btn {
-  background: var(--mb-gradient) !important;
+  background: var(--mb-primary) !important;
   border: none !important;
   color: #fff !important;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0, 185, 107, 0.25);
+  font-weight: 500;
 }
+.mb-btn:active { background: var(--mb-primary-hover) !important; }
 
-.mb-navbar { background: var(--mb-gradient); }
-.mb-navbar .van-nav-bar__title,
-.mb-navbar .van-nav-bar__arrow { color: #fff !important; }
+/* BOSS式导航：白底黑字+底部细线，无渐变 */
+.mb-navbar { background: #fff; }
+.mb-navbar::after { border-color: #eef0f2; }
+.mb-navbar .van-nav-bar__title { color: var(--mb-title); font-weight: 600; }
+.mb-navbar .van-nav-bar__arrow { color: var(--mb-text); }
 
+/* 卡片：白底12px，无阴影（BOSS式靠底色分区） */
 .mb-card {
   background: var(--mb-card);
   border-radius: var(--mb-radius);
@@ -46,15 +49,16 @@ body { background: var(--mb-bg); color: var(--mb-text); }
   padding: 14px;
 }
 
-.mb-page-title { font-size: 22px; font-weight: 700; }
+/* BOSS式品牌色文字logo（纯青） */
+.mb-logo { color: var(--mb-primary); }
 
-.mb-logo {
-  font-size: 34px; font-weight: 800;
-  background: var(--mb-gradient);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-  letter-spacing: 1px;
-}
+/* 薪资：红橙大字（全场唯一暖色，钱最醒目——BOSS视觉密码） */
+.mb-salary { color: var(--mb-salary); font-weight: 500; }
 
-.mb-salary { color: var(--mb-salary); font-weight: 700; }
+/* 职位名：BOSS式青色链接感 */
+.mb-job-name { color: var(--mb-primary); font-size: 16px; font-weight: 500; }
 
-.van-tabbar-item--active { color: var(--mb-primary) !important; font-weight: 600; }
+/* 标签：蓝灰文字直排（BOSS式，无底色） */
+.mb-plain-tags { color: var(--mb-text); font-size: 13px; }
+
+.van-tabbar-item--active { color: var(--mb-primary) !important; }

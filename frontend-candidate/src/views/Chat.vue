@@ -68,9 +68,9 @@ onUnmounted(() => clearInterval(timer))
 .bubble { max-width: 78%; margin-bottom: 14px; }
 .bubble.mine { margin-left: auto; }
 .sender { font-size: 12px; color: var(--mb-sub); margin-bottom: 3px; }
-.text { padding: 10px 14px; border-radius: 16px 16px 16px 4px; background: #fff;
-  box-shadow: var(--mb-shadow); word-break: break-all; }
-.mine .text { background: var(--mb-gradient); color: #fff; border-radius: 16px 16px 4px 16px; }
+.text { padding: 10px 14px; border-radius: 12px 12px 12px 4px; background: #fff;
+  word-break: break-all; }
+.mine .text { background: var(--mb-primary); color: #fff; border-radius: 12px 12px 4px 12px; }
 .time { font-size: 11px; color: #c8c9cc; margin-top: 3px; }
 .input-bar { position: fixed; bottom: 0; left: 0; right: 0; display: flex; gap: 8px;
   padding: 8px 12px; background: #fff; box-shadow: 0 -2px 12px rgba(0,0,0,.06); }
