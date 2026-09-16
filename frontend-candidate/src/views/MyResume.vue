@@ -43,16 +43,18 @@
       </div>
     </van-cell-group>
 
-    <van-cell-group inset title="发布">
-      <van-cell center title="对外发布简历" label="发布后才能投递职位">
-        <template #right-icon>
-          <van-switch v-model="published" size="22" />
-        </template>
-      </van-cell>
+    <van-cell-group inset v-if="loaded && published">
+      <van-cell title="✅ 简历已发布" label="对外可见，可投递职位；再次保存即自动更新" />
     </van-cell-group>
 
     <div class="action">
-      <van-button round block type="primary" :loading="saving" @click="save">保存简历</van-button>
+      <div class="btn-row">
+        <van-button v-if="!published" round plain type="default" :loading="saving"
+                    @click="save(false)" class="half">暂存草稿</van-button>
+        <van-button round type="primary" :loading="saving" @click="save(true)" class="half">
+          {{ published ? '更新简历' : '发布简历' }}
+        </van-button>
+      </div>
     </div>
 
     <van-tabbar route>
@@ -82,6 +84,7 @@ import { compressPhoto } from '../utils/photo'
 const form = ref({ name: '', photo: '', expectCategory: '', expectCity: '', intro: '' })
 const salaryText = ref('')
 const published = ref(false)
+const loaded = ref(false)
 const experiences = ref([])
 const saving = ref(false)
 const fileInput = ref(null)
@@ -114,6 +117,7 @@ onMounted(async () => {
     published.value = d.published === 1
     experiences.value = d.experiences || []
   }
+  loaded.value = true
 })
 
 const pickPhoto = () => fileInput.value.click()
@@ -160,7 +164,7 @@ const delExp = async exp => {
   experiences.value = experiences.value.filter(e => e.id !== exp.id)
 }
 
-const save = async () => {
+const save = async publish => {
   const m = salaryText.value.match(/^(\d+)\s*-\s*(\d+)$/)
   saving.value = true
   try {
@@ -168,9 +172,14 @@ const save = async () => {
       ...form.value,
       expectSalaryMin: m ? +m[1] : null,
       expectSalaryMax: m ? +m[2] : null,
-      published: published.value ? 1 : 0
+      published: publish ? 1 : 0
     })
-    showToast('已保存')
+    if (publish && !published.value) {
+      published.value = true
+      showToast('🎉 简历已发布，可以去投递了')
+    } else {
+      showToast(publish ? '简历已更新' : '草稿已暂存')
+    }
   } catch (e) {
     showToast(e.msg || e)
   } finally {
@@ -186,4 +195,6 @@ const save = async () => {
 .exp { margin-bottom: 2px; }
 .add-exp { padding: 10px 16px; }
 .action { margin: 20px 16px 70px; }
+.btn-row { display: flex; gap: 12px; }
+.half { flex: 1; }
 </style>
