@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniboos.mapper.ApplicationMapper">
+
+    <!-- 牛人视角·我的投递 -->
+    <select id="listByUser" resultType="com.miniboos.dto.ApplicationVO">
+        SELECT a.id, a.job_id AS jobId, j.title AS jobTitle,
+               c.name AS companyName, a.status, a.created_at AS createdAt
+        FROM applications a
+        JOIN jobs j ON a.job_id = j.id
+        JOIN companies c ON j.company_id = c.id
+        WHERE a.user_id = #{userId}
+        ORDER BY a.created_at DESC
+    </select>
+
+    <!-- HR视角·投递列表：牛人期望 vs 职位要求 打标记（方向+3/城市+2/薪资+1） -->
+    <select id="listCandidatesByJob" resultType="com.miniboos.dto.CandidateVO">
+        SELECT a.id AS applicationId, a.user_id AS userId,
+               r.name AS candidateName,
+               r.expect_category AS expectCategory,
+               dcat.label AS expectCategoryLabel,
+               dcity.label AS expectCityLabel,
+               r.expect_salary_min AS expectSalaryMin,
+               r.expect_salary_max AS expectSalaryMax,
+               (CASE WHEN r.expect_category = j.category THEN 3 ELSE 0 END
+                 + CASE WHEN r.expect_city = j.city THEN 2 ELSE 0 END
+                 + CASE WHEN j.salary_min &lt;= r.expect_salary_max OR j.salary_max &gt;= r.expect_salary_min THEN 1 ELSE 0 END) AS matchScore,
+               a.status, a.created_at AS appliedAt
+        FROM applications a
+        JOIN jobs j ON a.job_id = j.id
+        JOIN resumes r ON a.user_id = r.user_id
+        LEFT JOIN dict_items dcat ON r.expect_category = dcat.code AND dcat.dict_type = 'category'
+        LEFT JOIN dict_items dcity ON r.expect_city = dcity.code AND dcity.dict_type = 'city'
+        WHERE a.job_id = #{jobId}
+        ORDER BY matchScore DESC, a.created_at DESC
+    </select>
+</mapper>

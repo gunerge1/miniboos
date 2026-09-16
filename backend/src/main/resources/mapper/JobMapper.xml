@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniboos.mapper.JobMapper">
+
+    <!-- 公开职位列表：筛选 + 意向匹配CASE打分排序（PRD钉死：字段级匹配，非算法）
+         打分：方向命中+3 / 城市命中+2 / 薪资区间重叠+1 -->
+    <select id="listPublic" resultType="com.miniboos.dto.JobVO">
+        SELECT j.id, j.title, j.category, j.city, j.education,
+               j.salary_min AS salaryMin, j.salary_max AS salaryMax,
+               j.created_at AS createdAt,
+               c.id AS companyId, c.name AS companyName,
+               dcat.label AS categoryLabel,
+               dcity.label AS cityLabel,
+               dedu.label AS educationLabel,
+               dind.label AS companyIndustryLabel,
+               (CASE WHEN j.category = #{expectCategory} THEN 3 ELSE 0 END
+                 + CASE WHEN j.city = #{expectCity} THEN 2 ELSE 0 END
+                 + CASE WHEN j.salary_min &lt;= #{expectSalaryMax} OR j.salary_max &gt;= #{expectSalaryMin} THEN 1 ELSE 0 END) AS matchScore
+        FROM jobs j
+        JOIN companies c ON j.company_id = c.id
+        LEFT JOIN dict_items dcat ON j.category = dcat.code AND dcat.dict_type = 'category'
+        LEFT JOIN dict_items dcity ON j.city = dcity.code AND dcity.dict_type = 'city'
+        LEFT JOIN dict_items dedu ON j.education = dedu.code AND dedu.dict_type = 'education'
+        LEFT JOIN dict_items dind ON c.industry = dind.code AND dind.dict_type = 'industry'
+        <where>
+            j.status = 'ACTIVE'
+            AND c.status = 'APPROVED'
+            <if test="category != null and category != ''">AND j.category = #{category}</if>
+            <if test="city != null and city != ''">AND j.city = #{city}</if>
+            <if test="kw != null and kw != ''">AND (j.title LIKE CONCAT('%', #{kw}, '%') OR j.description LIKE CONCAT('%', #{kw}, '%'))</if>
+        </where>
+        ORDER BY matchScore DESC, j.created_at DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <select id="countPublic" resultType="long">
+        SELECT COUNT(*)
+        FROM jobs j JOIN companies c ON j.company_id = c.id
+        <where>
+            j.status = 'ACTIVE'
+            AND c.status = 'APPROVED'
+            <if test="category != null and category != ''">AND j.category = #{category}</if>
+            <if test="city != null and city != ''">AND j.city = #{city}</if>
+            <if test="kw != null and kw != ''">AND (j.title LIKE CONCAT('%', #{kw}, '%') OR j.description LIKE CONCAT('%', #{kw}, '%'))</if>
+        </where>
+    </select>
+</mapper>

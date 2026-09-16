@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.miniboos.mapper.MessageMapper">
+
+    <!-- 会话留言（发送者身份：HR用昵称，牛人用简历姓名） -->
+    <select id="listByApplication" resultType="com.miniboos.dto.MessageVO">
+        SELECT m.id, m.sender_id AS senderId, u.role AS senderRole,
+               COALESCE(r.name, u.nickname, CONCAT(LEFT(u.phone, 3), '****', RIGHT(u.phone, 4))) AS senderName,
+               m.content, m.created_at AS createdAt
+        FROM messages m
+        JOIN users u ON m.sender_id = u.id
+        LEFT JOIN resumes r ON m.sender_id = r.user_id
+        WHERE m.application_id = #{applicationId}
+        ORDER BY m.created_at
+    </select>
+</mapper>
