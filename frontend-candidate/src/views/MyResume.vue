@@ -1,13 +1,19 @@
 <template>
   <div class="page">
-    <van-nav-bar title="我的简历" class="mb-navbar" />
+    <van-nav-bar title="我的简历" class="mb-navbar">
+      <template #right>
+        <van-icon name="apps-o" size="22" color="#00a6a7" @click="menuShow = true" />
+      </template>
+    </van-nav-bar>
     <!-- BOSS式个人卡：头像左、姓名+求职属性右 -->
     <van-cell-group inset class="profile-card">
       <div class="profile-head">
-        <div class="avatar-box" @click="pickPhoto">
-          <img v-if="form.photo" :src="form.photo" class="avatar" />
-          <van-icon v-else name="user-o" size="34" color="#c8cdd6" />
-          <div class="avatar-cam"><van-icon name="camera-o" size="12" color="#fff" /></div>
+        <div class="avatar-wrap" @click="pickPhoto">
+          <div class="avatar-box">
+            <img v-if="form.photo" :src="form.photo" class="avatar" />
+            <van-icon v-else name="user-o" size="34" color="#c8cdd6" />
+          </div>
+          <div class="avatar-tip">{{ form.photo ? '更换照片' : '上传照片' }}</div>
         </div>
         <div class="profile-info">
           <input v-model="form.name" class="name-input" placeholder="点击填写姓名" maxlength="12" />
@@ -30,7 +36,7 @@
       <van-field v-model="cityLabel" is-link readonly label="期望城市" placeholder="选择城市"
                  @click="showCity = true" />
       <van-field v-model="salaryText" label="期望薪资" placeholder="如 20-30（K/月）" />
-      <van-field v-model="form.intro" rows="3" autosize type="textarea" label="自我介绍" placeholder="一段话说清你是谁" />
+      <van-field v-model="form.intro" :autosize="{ minHeight: 44, maxHeight: 160 }" type="textarea" label="自我介绍" placeholder="一段话说清你是谁" />
     </van-cell-group>
 
     <van-popup v-model:show="showCategory" round position="bottom">
@@ -65,7 +71,6 @@
           {{ published ? '更新简历' : '发布简历' }}
         </van-button>
       </div>
-      <van-button round block plain type="danger" class="logout" @click="logout">退出登录</van-button>
     </div>
 
     <van-tabbar route>
@@ -83,6 +88,9 @@
         <van-field v-model="expForm.description" rows="2" autosize type="textarea" label="描述" />
       </van-cell-group>
     </van-dialog>
+
+    <van-action-sheet v-model:show="menuShow" :actions="menuActions" cancel-text="取消"
+                      @select="onMenu" />
   </div>
 </template>
 
@@ -94,7 +102,10 @@ import { dicts, resumeApi } from '../api'
 import { compressPhoto } from '../utils/photo'
 
 const router = useRouter()
-const logout = () => {
+const menuShow = ref(false)
+const menuActions = [{ name: '退出登录', color: '#ee0a24' }]
+const onMenu = () => {
+  menuShow.value = false
   localStorage.removeItem('token')
   localStorage.removeItem('role')
   localStorage.removeItem('nickname')
@@ -212,11 +223,11 @@ const save = async publish => {
 /* BOSS式个人卡：头像左、信息右 */
 .profile-card { margin-top: 12px; }
 .profile-head { display: flex; align-items: center; gap: 14px; padding: 16px; }
-.avatar-box { position: relative; width: 64px; height: 86px; border-radius: 8px; background: var(--mb-chip-bg);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; }
-.avatar { width: 100%; height: 100%; border-radius: 8px; object-fit: cover; }
-.avatar-cam { position: absolute; right: -7px; bottom: -7px; width: 22px; height: 22px; border-radius: 50%;
-  background: var(--mb-primary); display: flex; align-items: center; justify-content: center; border: 2px solid #fff; }
+.avatar-wrap { flex-shrink: 0; cursor: pointer; }
+.avatar-box { width: 64px; height: 86px; border-radius: 8px; background: var(--mb-chip-bg);
+  display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.avatar { width: 100%; height: 100%; object-fit: cover; }
+.avatar-tip { text-align: center; font-size: 10px; color: #969799; margin-top: 6px; }
 .profile-info { flex: 1; min-width: 0; }
 .name-input { border: none; outline: none; font-size: 20px; font-weight: 600; color: var(--mb-title);
   background: transparent; width: 100%; padding: 0; font-family: inherit; }
@@ -228,5 +239,4 @@ const save = async publish => {
 .action { margin: 20px 16px 90px; }
 .btn-row { display: flex; gap: 12px; }
 .half { flex: 1; }
-.logout { margin-top: 12px; }
 </style>
