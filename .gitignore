@@ -1,0 +1,13 @@
+# 密钥——绝不入库（Day 3 铁律）
+.env
+*.env
+
+# 依赖与构建产物
+node_modules/
+target/
+dist/
+build/
+
+# 日志与临时文件
+*.log
+.DS_Store
